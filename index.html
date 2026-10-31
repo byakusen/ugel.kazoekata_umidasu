@@ -72,7 +72,11 @@ h1 .b{color:var(--blue)}h1 .o{color:var(--orange)}h1 .g{color:var(--green)}
 .tab.word small{color:var(--gl-ink)}
 .tab.word[aria-selected="true"]{background:var(--gl);color:#fff}
 .tab.word[aria-selected="true"] small{color:#fff}
-.tab:not(.word)[aria-selected="true"]::after{content:"";display:block;height:4px;border-radius:4px;margin:5px auto 0;width:40%;
+.tab.renshu{background:#FDEDF0;color:#B8384F}
+.tab.renshu small{color:#B8384F}
+.tab.renshu[aria-selected="true"]{background:#D44D66;color:#fff}
+.tab.renshu[aria-selected="true"] small{color:#fff}
+.tab:not(.word):not(.renshu)[aria-selected="true"]::after{content:"";display:block;height:4px;border-radius:4px;margin:5px auto 0;width:40%;
   background:linear-gradient(90deg,var(--blue),var(--orange),var(--green))}
 
 /* パネル（タブの中身が入るところ。はみ出さない） */
@@ -217,6 +221,39 @@ h1 .b{color:var(--blue)}h1 .o{color:var(--orange)}h1 .g{color:var(--green)}
 .dkmsg.show{opacity:1;transform:none}
 .dkcnt{font-weight:800;color:var(--ink-soft)}
 .dkcnt b{color:var(--red)}
+/* ⑤ 言葉の練習 */
+.kp{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:14px}
+.kplist{display:flex;flex-direction:column;gap:10px;min-height:0;overflow:auto}
+.kprow{flex:1;min-height:0;display:flex;align-items:center;gap:12px;background:var(--glass-strong);border-radius:16px;padding:8px 14px;
+  border:3px solid transparent;box-shadow:0 2px 8px rgba(40,60,80,.06);transition:border-color .2s,background .2s}
+.kprow.sel{border-color:var(--orange);background:#fff}
+.kpno{flex:none;width:1.9em;height:1.9em;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.05rem}
+.kptxt{flex:1;min-width:0;font-weight:700;font-size:clamp(1.05rem,1.8vw,1.4rem);line-height:1.9}
+.kptxt.mean{display:flex;align-items:center;gap:8px}
+.kplead{flex:1;min-width:1.5em;border-bottom:3px dotted rgba(36,50,61,.3);align-self:center}
+.kpslot{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:6.5em;vertical-align:middle;margin:0 4px;
+  border:3px dashed var(--ink-soft);border-radius:12px;background:transparent;padding:0 10px;font-weight:800;font-size:inherit;line-height:1.6;
+  transition:background .2s,border-color .2s,box-shadow .2s}
+.kptxt.mean .kpslot{flex:none}
+.kpslot:hover{background:#fff}
+.kpslot b{color:var(--orange)}
+.kpslot.fill{border-style:solid;border-color:rgba(36,50,61,.35);background:#fff}
+.kprow.sel .kpslot{border-color:var(--orange);box-shadow:0 0 0 3px rgba(217,102,31,.25)}
+.kpslot.ok{border-color:var(--green);background:var(--green-bg)}
+.kpslot.ng{border-color:var(--red);background:#fde2e2}
+.kpmark{flex:none;width:1.4em;text-align:center;font-size:1.9rem;font-weight:800;line-height:1}
+.kpmark.ok{color:var(--green)}.kpmark.ng{color:var(--red)}
+.kpside{display:flex;flex-direction:column;gap:10px;min-height:0;overflow:auto}
+.kpbank{border:3px dashed rgba(210,60,60,.45);border-radius:20px;background:rgba(255,255,255,.7);padding:12px;display:flex;flex-direction:column;gap:8px}
+.kpw{border:2px solid rgba(36,50,61,.12);background:#fff;border-radius:14px;padding:8px 14px;font-size:1.25rem;font-weight:800;text-align:left;
+  display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(40,60,80,.08);transition:transform .15s,border-color .15s,opacity .2s}
+.kpw:hover{transform:translateY(-2px);border-color:var(--orange)}
+.kpw b{flex:none;width:1.6em;height:1.6em;border-radius:50%;background:var(--orange-bg);color:var(--orange);display:grid;place-items:center;font-size:1.05rem}
+.kpw.used{opacity:.5}
+.kpbtns{display:flex;gap:8px}
+.kpbtns .btn{flex:1}
+.kpmsg{min-height:1.4em;font-weight:700;line-height:1.5;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.kpmsg.show{opacity:1;transform:none}
 /* ===== 重要語句（ひな形1・つなぐ言葉と同じつくり：12まいずつ） ===== */
 .wdocs{flex:1;display:grid;grid-template-columns:1.6fr 1fr;gap:.55rem;min-height:0}
 .wboard{position:relative;background:var(--wcard);border:1px solid var(--wline);border-radius:14px;padding:.5rem;
@@ -292,6 +329,12 @@ h1 .b{color:var(--blue)}h1 .o{color:var(--orange)}h1 .g{color:var(--green)}
   .dklab{font-size:1.05rem}
   .dklab small{display:none}
   .dkwait{min-height:200px}
+  .kp{grid-template-columns:1fr;flex:none}
+  .kplist,.kpside{overflow:visible}
+  .kprow{flex:none;padding:8px 10px}
+  .kptxt.mean{flex-wrap:wrap}
+  .kplead{display:none}
+  .kpw{font-size:1.1rem}
   .bar .lead{flex-basis:100%}
   .opts{gap:8px}
   .opt{padding:12px 4px}
@@ -360,6 +403,7 @@ const TABS = [
   {view:'danraku', tab:'② 文章の組み立て',   sub:'数えてまとめる'},
   {view:'quiz',    tab:'③ 数え方クイズ',     sub:'auto'},
   {view:'tsukuru', tab:'④ 新しい数え方',     sub:'作って発表'},
+  {view:'renshu',  tab:'⑤ 言葉の練習',       sub:'えらんで答える'},
   {view:'words',   tab:'重要語句',           sub:'ことばのいみ'}
 ];
 
@@ -636,6 +680,107 @@ VIEWS.tsukuru = function(){
     tkCards.push({thing:tkThing, word:w, point:tkPoint, why:y});
     tkDraft={w:'',y:''}; tkShow=-1; tkThing=''; tkPoint='';
     pinpon(); VIEWS.tsukuru(); setTimeout(party,150);
+  };
+};
+
+/* ---- ⑤ 言葉の練習（テストの形：□の中から言葉をえらぶ） ----
+   type:'use' は文の（　）に合う言葉、type:'mean' は意味に合う言葉。
+   words：えらぶ言葉（ア〜オ）。qs の a は words の番号（0から）。text の □ が（　）になる */
+const RENSHU = {
+  sets:[
+    {name:'使い方 1', type:'use', lead:'（　）に合う言葉を、□の中からえらぼう。',
+     words:['注目する','かじる','生み出す','果たす','せばめる'],
+     qs:[
+      {t:'ハムスターが、ひまわりの種を□。', a:1},
+      {t:'図書委員として、本を貸し出す役目を□。', a:3},
+      {t:'工事のさくが、歩道のはばを□。', a:4},
+      {t:'試合の最後のシュートに、会場のみんなが□。', a:0}
+     ]},
+    {name:'使い方 2', type:'use', lead:'（　）に合う言葉を、□の中からえらぼう。',
+     words:['結びつく','上がる','とらえる','見通す','使い分ける'],
+     qs:[
+      {t:'相手に合わせて、ていねいな言葉とふつうの言葉を□。', a:4},
+      {t:'毎日の小さな練習が、大会での勝利に□。', a:0},
+      {t:'ゴールが決まると、スタンドから大きなかん声が□。', a:1},
+      {t:'説明文を読んで、筆者の考えをしっかり□。', a:2}
+     ]},
+    {name:'意味 1', type:'mean', lead:'次の意味を表す言葉を、□の中からえらぼう。',
+     words:['おどろき','じゅうなんさ','意外','発想','連想'],
+     qs:[
+      {t:'こうなるだろうと思っていたのと、ちがっていること。', a:2},
+      {t:'思いがけないことに、びっくりすること。', a:0},
+      {t:'その時に合わせて、考え方ややり方を自由に変えられること。', a:1},
+      {t:'ある物事から、それにかかわりのあることを思いうかべること。', a:4}
+     ]},
+    {name:'意味 2', type:'mean', lead:'次の意味を表す言葉を、□の中からえらぼう。',
+     words:['便利','ヒント','ゆたか','役割','ごうか'],
+     qs:[
+      {t:'お金がたくさんかかっていて、きらびやかなようす。', a:4},
+      {t:'その人や物が、しなければならない仕事やはたらき。', a:3},
+      {t:'物や気持ちが、たっぷりと満ちあふれているようす。', a:2},
+      {t:'役に立って、使いやすいようす。', a:0}
+     ]}
+  ]
+};
+const KANA='アイウエオカキクケコ';
+let kpSet=0, kpAns=[], kpSel=0, kpChecked=false;
+function kpStart(){ kpAns=RENSHU.sets[kpSet].qs.map(()=>-1); kpSel=0; kpChecked=false; }
+VIEWS.renshu = function(){
+  const S=RENSHU.sets[kpSet];
+  if(kpAns.length!==S.qs.length) kpStart();
+  const filled=kpAns.every(v=>v>=0);
+  const okAll=kpChecked && S.qs.every((q,i)=>kpAns[i]===q.a);
+  const slot=(i)=>{
+    const v=kpAns[i], st=kpChecked&&v>=0?(v===S.qs[i].a?' ok':' ng'):'';
+    return `<button class="kpslot${v>=0?' fill':''}${st}" data-i="${i}" aria-label="${i+1}の答えをえらぶ">${v>=0?`<b>${KANA[v]}</b>${S.words[v]}`:'　'}</button>`;
+  };
+  panel.innerHTML=`
+    <div class="bar">
+      <div class="lead">${S.lead.replace('□','<span class="cw c-orange">□</span>')}</div>
+      <div class="seg" id="kpSets">${RENSHU.sets.map((x,k)=>`<button class="${k===kpSet?'on':''}" data-k="${k}">${x.name}</button>`).join('')}</div>
+      <button class="btn" id="kpReset">もう一度</button>
+    </div>
+    <div class="kp">
+      <div class="kplist">${S.qs.map((q,i)=>{
+        const st=kpChecked&&kpAns[i]>=0?(kpAns[i]===q.a?'ok':'ng'):'';
+        const body=S.type==='mean'?`<div class="kptxt mean"><span>${q.t}</span><span class="kplead"></span>${slot(i)}</div>`
+                                  :`<div class="kptxt">${q.t.replace('□','（'+slot(i)+'）')}</div>`;
+        return `<div class="kprow ${kpSel===i&&!okAll?'sel':''}" data-i="${i}">
+          <span class="kpno">${i+1}</span>${body}
+          <span class="kpmark ${st}">${st==='ok'?'◯':st==='ng'?'✕':''}</span>
+        </div>`;}).join('')}
+      </div>
+      <div class="kpside">
+        <div class="label">（　）をおしてから、言葉をおそう。</div>
+        <div class="kpbank">${S.words.map((w,k)=>`<button class="kpw ${kpAns.includes(k)?'used':''}" data-k="${k}"><b>${KANA[k]}</b>${w}</button>`).join('')}</div>
+        <div class="kpbtns"><button class="btn main" id="kpCheck" ${filled?'':'disabled'}>答え合わせ</button></div>
+        <div class="kpmsg" id="kpMsg"></div>
+      </div>
+    </div>`;
+  const say=(h)=>{ const m=$('#kpMsg'); m.innerHTML=h; requestAnimationFrame(()=>m.classList.add('show')); };
+  panel.querySelectorAll('#kpSets button').forEach(b=>b.onclick=()=>{ const k=+b.dataset.k; if(k===kpSet)return; kpSet=k; kpStart(); VIEWS.renshu(); });
+  $('#kpReset').onclick=()=>{ kpStart(); VIEWS.renshu(); };
+  panel.querySelectorAll('.kprow').forEach(r=>r.onclick=()=>{ const i=+r.dataset.i; if(kpSel===i)return; kpSel=i; VIEWS.renshu(); });
+  panel.querySelectorAll('.kpslot').forEach(b=>b.onclick=e=>{
+    e.stopPropagation();
+    const i=+b.dataset.i;
+    if(kpSel===i && kpAns[i]>=0){ kpAns[i]=-1; kpChecked=false; }
+    kpSel=i; VIEWS.renshu();
+  });
+  panel.querySelectorAll('.kpw').forEach(b=>b.onclick=()=>{
+    if(kpSel<0){ say('<b class="ngc">先に、（　）をおしてね。</b>'); return; }
+    kpAns[kpSel]=+b.dataset.k; kpChecked=false;
+    const next=kpAns.findIndex((v,j)=>v<0 && j>kpSel), first=kpAns.indexOf(-1);
+    kpSel=next>=0?next:first;
+    VIEWS.renshu();
+  });
+  $('#kpCheck').onclick=()=>{
+    kpChecked=true;
+    const ok=S.qs.filter((q,i)=>kpAns[i]===q.a).length, n=S.qs.length;
+    kpSel=ok===n?-1:S.qs.findIndex((q,i)=>kpAns[i]!==q.a);
+    VIEWS.renshu();
+    if(ok===n){ say('<b class="okc">◯ ぜんぶ正しい！</b> 言葉の使い方・意味が分かっているね。'); pinpon(); setTimeout(party,150); }
+    else { say(`<b class="ngc">${ok} / ${n} 正解。</b>✕の（　）をおして、言葉をえらびなおそう。`); bubu(); }
   };
 };
 
@@ -991,7 +1136,7 @@ TABS.forEach((t,i)=>{
   if(!VIEWS[t.view]) console.error('タブの view「'+t.view+'」がありません');
   const sub=t.sub==='auto'&&t.view==='quiz'?QUIZ.qs.length+'もん':t.sub;
   const b=document.createElement('button');
-  b.className='tab'+(t.view==='words'?' word':'');
+  b.className='tab'+(t.view==='words'?' word':'')+(t.view==='renshu'?' renshu':'');
   b.setAttribute('role','tab');
   b.setAttribute('aria-selected',i===0?'true':'false');
   b.innerHTML=t.tab+(sub?`<small>${sub}</small>`:'');
